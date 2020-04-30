@@ -13,7 +13,7 @@ jobs:
     - name: Run the action
       uses: ./
       with: 
-        authToken: ${{secrets.GITHUB_TOKEN}}
+        authToken: ${{secrets.AUTH_TOKEN}}
         context: 'Test run'
         description: 'Passed'
         state: 'success'
