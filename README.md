@@ -1,5 +1,7 @@
 <p align="center">
-  <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" src="https://github.com/Sibz/github-status-action/workflows/test/badge.svg"></a>
+  <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" 
+  src="https://github.com/Sibz/github-status-action/workflows/test/badge.svg"></a>
+  <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" src="https://github.com/Sibz/github-status-action/workflows/build/badge.svg"></a>
 </p>
 
 # Github Status Action
