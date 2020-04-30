@@ -1,6 +1,9 @@
 name: 'github-status-action'
 description: 'Adds a check status on a commit, github reports the last status added for a particular context.'
 author: 'Sibz@EntityZero'
+branding:
+  icon: 'check'  
+  color: 'green'
 inputs:
   authToken:
     description: 'Use secrets.GITHUB_TOKEN or your own token if you need to trigger other workflows the use "on: status"'
