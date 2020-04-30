@@ -1,0 +1,45 @@
+{
+  "name": "github-status-action",
+  "version": "1.0.0-alpha.1",
+  "private": true,
+  "description": "Github status action",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "ava",
+    "pack": "ncc build",
+    "all": "npm run build && npm test",
+    "push": "npm run build && npm run pack && git add * && git commit -m \"Updated built file\" && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sibz/github-status-action.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "author": "Sibz@EntityZero",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@octokit/rest": "^17.6.0"
+  },
+  "devDependencies": {
+    "@octokit/types": "^2.12.2",
+    "@types/node": "^12.7.12",
+    "@zeit/ncc": "^0.20.5",
+    "ava": "^3.8.1",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.6.4"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}
