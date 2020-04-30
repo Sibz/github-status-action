@@ -17,3 +17,4 @@ jobs:
         context: 'Test run'
         description: 'Passed'
         state: 'success'
+        sha: ${{github.pull_request.head.sha}}
