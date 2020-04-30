@@ -36,3 +36,26 @@ Adds a status update to a commit. GitHub will always show the latest state of a 
   ```
   ### Outputs
   None.
+
+  ## Example
+  ```yml
+name: "test"
+on: # run on any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - master
+
+  jobs:
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run the action # You would run your tests before this using the output to set state/desc
+      uses: Sibz/github-status-action@v1
+      with: 
+        authToken: ${{secrets.GITHUB_TOKEN}}
+        context: 'Test run'
+        description: 'Passed'
+        state: 'success'
+```
