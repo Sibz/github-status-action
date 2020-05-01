@@ -5740,6 +5740,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const actionsCore = __importStar(__webpack_require__(470));
 const inputNames_1 = __importDefault(__webpack_require__(686));
 exports.ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
+exports.ERR_INVALID_STATE = "Input 'state' must be one of success | error | failure | pending";
 const regExUsername = /^\w+-?\w+(?!-)$/;
 function makeStatusRequest(testCore = null) {
     var _a;
@@ -5755,12 +5756,21 @@ function makeStatusRequest(testCore = null) {
     if (!regExUsername.test(request.owner)) {
         throw new Error(exports.ERR_INVALID_OWNER);
     }
+    if (!validateState(request.state)) {
+        throw new Error(exports.ERR_INVALID_STATE);
+    }
     if (request.repo.startsWith(`${request.owner}/`)) {
         request.repo = request.repo.replace(`${request.owner}/`, '');
     }
     return request;
 }
 exports.default = makeStatusRequest;
+function validateState(state) {
+    return (state == "success"
+        || state == "error"
+        || state == "failure"
+        || state == "pending");
+}
 
 
 /***/ }),
