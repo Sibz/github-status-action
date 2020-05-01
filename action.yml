@@ -7,16 +7,18 @@ branding:
 inputs:
   authToken:
     description: 'Use secrets.GITHUB_TOKEN or your own token if you need to trigger other workflows the use "on: status"'
+    required: true  
+  state:
+    description: 'The status of the check: success, error, failure or pending'
     required: true
   context:
     description: 'The context, this is displayed as the name of the check'
-    required: true
+    default: 'default'
+    required: false
   description:
     description: 'Short text explaining the status of the check'
-    required: true
-  state:
-    description: 'The status of the check: success, error, failure or pending'
-    required: true    
+    default: ''
+    required: false
   owner:
     description: 'Repostory onwer, defaults to context github.repository_owner if omited'
     default: ${{ github.repository_owner }}
