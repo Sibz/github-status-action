@@ -9,7 +9,7 @@
     "test": "ava",
     "pack": "ncc build",
     "all": "npm run build && npm test",
-    "push": "npm run build && npm run pack && git add * && git commit -m \"refactor: update built file\" && git push"
+    "push": "npm run build && npm run pack && git add * && git commit -m \"ci: update built file\" && git push"
   },
   "repository": {
     "type": "git",
