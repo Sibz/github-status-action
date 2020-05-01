@@ -4,7 +4,7 @@
   <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" src="https://github.com/Sibz/github-status-action/workflows/build/badge.svg"></a>
 </p>
 
-# Github Status Action
+# GitHub Status Action
 
 Adds a status update to a commit. GitHub will always show the latest state of a context.
 
