@@ -14,12 +14,12 @@ Adds a status update to a commit. GitHub will always show the latest state of a 
 
  * `authToken` (required)  
  Use secrets.GITHUB_TOKEN or your own token if you need to trigger other workflows that use "on: status"'
- * `context` (required)  
- The context, this is displayed as the name of the check
- * `description` (required)  
- Short text explaining the status of the check
  * `state` (required)  
  The status of the check should only be `success`, `error`, `failure` or `pending`
+ * `context`  
+ The context, this is displayed as the name of the check
+ * `description`  
+ Short text explaining the status of the check
  * `owner`  
  Repostory onwer, defaults to context github.repository_owner if omited
  * `repository`  
