@@ -31,7 +31,7 @@ jobs:
         context: "Test run failed"
         description: "Failed test"
         sha: ${{github.event.pull_request.head.sha || github.sha}}
-        state: 'failed'
+        state: 'failure'
     - name: Test failing action now succeeded
       uses: ./
       with: 
