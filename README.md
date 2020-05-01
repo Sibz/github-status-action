@@ -11,29 +11,23 @@ Adds a status update to a commit. GitHub will always show the latest state of a 
 ## Usage
 
 ### Inputs
-```yml
- authToken:
-    description: 'Use secrets.GITHUB_TOKEN or your own token if you need to trigger other workflows the use "on: status"'
-    required: true
-  context:
-    description: 'The context, this is displayed as the name of the check'
-    required: true
-  description:
-    description: 'Short text explaining the status of the check'
-    required: true
-  state:
-    description: 'The status of the check: success, error, failure or pending'
-    required: true
-  owner:
-    description: 'Repostory onwer, defaults to context github.repository_owner if ommited'
-    default: ${{ github.repository_owner }}
-  repository:
-    description: 'Repository, default to context github.repository if ommited'
-    default: ${{ github.repository }}
-  sha:
-    description: 'SHA of commit to update status on, defaults to context github.sha'
-    default: ${{ github.sha }}
-  ```
+
+ * `authToken` (required)  
+ Use secrets.GITHUB_TOKEN or your own token if you need to trigger other workflows that use "on: status"'
+ * `context` (required)  
+ The context, this is displayed as the name of the check
+ * `description` (required)  
+ Short text explaining the status of the check
+ * `state` (required)  
+ The status of the check should only be `success`, `error`, `failure` or `pending`
+ * `owner`  
+ Repostory onwer, defaults to context github.repository_owner if omited
+ * `repository`  
+ Repository, default to context github.repository if omited
+ * `sha`  
+ SHA of commit to update status on, defaults to context github.sha  
+ *If using `on: pull_request` use `github.event.pull_request.head.sha`*
+  
   ### Outputs
   None.
 
@@ -58,4 +52,5 @@ on: # run on any PRs and main branch changes
         context: 'Test run'
         description: 'Passed'
         state: 'success'
+        sha: ${{github.event.pull_request.head.sha || github.sha}}
 ```
