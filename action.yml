@@ -16,16 +16,19 @@ inputs:
     required: true
   state:
     description: 'The status of the check: success, error, failure or pending'
-    required: true
+    required: true    
   owner:
     description: 'Repostory onwer, defaults to context github.repository_owner if omited'
     default: ${{ github.repository_owner }}
+    required: false
   repository:
     description: 'Repository, default to context github.repository if omited'
     default: ${{ github.repository }}
+    required: false
   sha:
     description: 'SHA of commit to update status on, defaults to context github.sha'
     default: ${{ github.sha }}
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
