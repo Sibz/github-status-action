@@ -27,6 +27,8 @@ Adds a status update to a commit. GitHub will always show the latest state of a 
  * `sha`  
  SHA of commit to update status on, defaults to context github.sha  
  *If using `on: pull_request` use `github.event.pull_request.head.sha`*
+ * `target_url`  
+ Url to use for the details link. If omited no link is shown.
   
   ### Outputs
   None.
