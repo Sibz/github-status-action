@@ -10,11 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Run the action
+    - name: Test min args
       uses: ./
       with: 
         authToken: ${{secrets.GITHUB_TOKEN}}
-        context: 'Test run'
-        description: 'Passed'
-        state: 'success'        
-        sha: ${{github.event.pull_request.head.sha || github.sha}}
+        state: 'success'
+    - name: Test with all args except owner/repo (success)
+      uses: ./
+      with: 
+        authToken: ${{secrets.GITHUB_TOKEN}}
+        context: "Test run"
+        description: "Test with all args"
+        target_url: "https://github.com/Sibz/github-status-action"
+        sha: ${{${{github.event.pull_request.head.sha || github.sha}}}}
+        state: 'success'
+    - name: Test failing action
+      uses: ./
+      with: 
+        authToken: ${{secrets.GITHUB_TOKEN}}
+        context: "Test run failed"
+        description: "Failed test"
+        sha: ${{${{github.event.pull_request.head.sha || github.sha}}}}
+        state: 'failed'
+    - name: Test failing action now succeeded
+      uses: ./
+      with: 
+        authToken: ${{secrets.GITHUB_TOKEN}}
+        context: "Test run failed"
+        description: "Failed test now succeeded"
+        sha: ${{${{github.event.pull_request.head.sha || github.sha}}}}
+        state: 'success'
+        
