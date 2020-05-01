@@ -22,7 +22,7 @@ jobs:
         context: "Test run"
         description: "Test with all args"
         target_url: "https://github.com/Sibz/github-status-action"
-        sha: ${{${{github.event.pull_request.head.sha || github.sha}}}}
+        sha: ${{github.event.pull_request.head.sha || github.sha}}
         state: 'success'
     - name: Test failing action
       uses: ./
@@ -30,7 +30,7 @@ jobs:
         authToken: ${{secrets.GITHUB_TOKEN}}
         context: "Test run failed"
         description: "Failed test"
-        sha: ${{${{github.event.pull_request.head.sha || github.sha}}}}
+        sha: ${{github.event.pull_request.head.sha || github.sha}}
         state: 'failed'
     - name: Test failing action now succeeded
       uses: ./
@@ -38,6 +38,6 @@ jobs:
         authToken: ${{secrets.GITHUB_TOKEN}}
         context: "Test run failed"
         description: "Failed test now succeeded"
-        sha: ${{${{github.event.pull_request.head.sha || github.sha}}}}
+        sha: ${{github.event.pull_request.head.sha || github.sha}}
         state: 'success'
         
