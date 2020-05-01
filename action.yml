@@ -1,5 +1,5 @@
 name: 'github-status-action'
-description: 'Adds a check status on a commit, github reports the last status added for a particular context.'
+description: 'Adds a check status on a commit, GitHub reports the last status added for a particular context.'
 author: 'Sibz@EntityZero'
 branding:
   icon: 'check'  
@@ -18,10 +18,10 @@ inputs:
     description: 'The status of the check: success, error, failure or pending'
     required: true
   owner:
-    description: 'Repostory onwer, defaults to context github.repository_owner if ommited'
+    description: 'Repostory onwer, defaults to context github.repository_owner if omited'
     default: ${{ github.repository_owner }}
   repository:
-    description: 'Repository, default to context github.repository if ommited'
+    description: 'Repository, default to context github.repository if omited'
     default: ${{ github.repository }}
   sha:
     description: 'SHA of commit to update status on, defaults to context github.sha'
