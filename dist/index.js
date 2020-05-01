@@ -604,35 +604,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const rest_1 = __webpack_require__(889);
+const makeStatusRequest_1 = __importDefault(__webpack_require__(677));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        let authToken = '';
-        let context = '';
-        let description = '';
-        let state = '';
-        let owner = '';
-        let repository = '';
-        let sha = '';
+        const authToken = core.getInput('authToken');
         let octokit = null;
         try {
-            authToken = core.getInput('authToken');
-            context = core.getInput('context');
-            description = core.getInput('description');
-            state = core.getInput('state');
-            owner = core.getInput('owner');
-            repository = core.getInput('repository');
-            sha = core.getInput('sha');
-        }
-        catch (error) {
-            core.setFailed("Error getting inputs:\n" + error.message);
-        }
-        try {
-            if (repository.startsWith(`${owner}/`)) {
-                repository = repository.replace(`${owner}/`, '');
-            }
             octokit = new rest_1.Octokit({
                 auth: authToken,
                 userAgent: "github-status-action",
@@ -651,24 +634,26 @@ function run() {
             });
         }
         catch (error) {
-            core.setFailed("Error creating ovtokit:\n" + error.message);
+            core.setFailed("Error creating octokit:\n" + error.message);
+            return;
         }
         if (octokit == null) {
+            core.setFailed("Error creating octokit:\noctokit was null");
+            return;
+        }
+        let statusRequest;
+        try {
+            statusRequest = makeStatusRequest_1.default();
+        }
+        catch (error) {
+            core.setFailed(`Error creating status request object: ${error.message}`);
             return;
         }
         try {
-            console.log(repository);
-            yield octokit.repos.createStatus({
-                owner: owner,
-                repo: repository,
-                context: context,
-                sha: sha,
-                state: state,
-                description: description
-            });
+            yield octokit.repos.createStatus(statusRequest);
         }
         catch (error) {
-            core.setFailed(`Error setting status:\n${error.message}\nDetails:\nowner:${owner}\nrepo:${repository}\nsha:${sha}`);
+            core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${statusRequest}`);
         }
     });
 }
@@ -5733,6 +5718,71 @@ if (process.platform === 'linux') {
 /***/ (function(module) {
 
 module.exports = require("util");
+
+/***/ }),
+
+/***/ 677:
+/***/ (function(__unusedmodule, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const actionsCore = __importStar(__webpack_require__(470));
+const inputNames_1 = __importDefault(__webpack_require__(686));
+exports.ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
+const regExUsername = /^\w+-?\w+(?!-)$/;
+function makeStatusRequest(testCore = null) {
+    var _a;
+    let core = (_a = testCore, (_a !== null && _a !== void 0 ? _a : actionsCore));
+    let request = {};
+    request.context = core.getInput(inputNames_1.default.context);
+    request.description = core.getInput(inputNames_1.default.desc);
+    request.state = core.getInput(inputNames_1.default.state);
+    request.owner = core.getInput(inputNames_1.default.owner);
+    request.repo = core.getInput(inputNames_1.default.repo);
+    request.sha = core.getInput(inputNames_1.default.sha);
+    request.target_url = core.getInput(inputNames_1.default.target_url);
+    if (!regExUsername.test(request.owner)) {
+        throw new Error(exports.ERR_INVALID_OWNER);
+    }
+    if (request.repo.startsWith(`${request.owner}/`)) {
+        request.repo = request.repo.replace(`${request.owner}/`, '');
+    }
+    return request;
+}
+exports.default = makeStatusRequest;
+
+
+/***/ }),
+
+/***/ 686:
+/***/ (function(__unusedmodule, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.INPUT_NAMES = {
+    authToken: "authToken",
+    owner: "owner",
+    repo: "repository",
+    state: "state",
+    context: "context",
+    sha: "sha",
+    desc: "description",
+    target_url: "target_url"
+};
+exports.default = exports.INPUT_NAMES;
+
 
 /***/ }),
 
