@@ -49,7 +49,7 @@ async function run(): Promise<void> {
       }
     });
   } catch (error) {
-    core.setFailed("Error creating ovtokit:\n" + error.message);
+    core.setFailed("Error creating octokit:\n" + error.message);
   }
   if (octokit == null) {
     return;
