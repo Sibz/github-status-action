@@ -1,0 +1,14 @@
+name: "smoke-screen-tests"
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  sst:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        npm install
+        npm test

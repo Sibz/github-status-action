@@ -1,37 +1,14 @@
 import * as core from '@actions/core'
 import { Octokit } from '@octokit/rest'
+import makeStatus, { StatusRequest } from './makeStatusRequest'
+import makeStatusRequest from './makeStatusRequest';
+import { RequestParameters } from '@octokit/types';
 
 async function run(): Promise<void> {
-  let authToken: string = '';
-  let context: string = '';
-  let description: string = '';
-  let state: any = '';
-  let owner: string = '';
-  let repository: string = '';
-  let sha: string = '';
-
+  const authToken: string = core.getInput('authToken');
   let octokit: Octokit | null = null;
 
   try {
-    authToken = core.getInput('authToken');
-    context = core.getInput('context');
-    description = core.getInput('description');
-    state = core.getInput('state');
-    owner = core.getInput('owner');
-    repository = core.getInput('repository');
-    sha = core.getInput('sha');
-
-  } catch (error) {
-    core.setFailed("Error getting inputs:\n" + error.message);
-  }
-
-  try {
-
-
-    if (repository.startsWith(`${owner}/`)) {
-      repository = repository.replace(`${owner}/`, '');
-    }
-
     octokit = new Octokit({
       auth: authToken,
       userAgent: "github-status-action",
@@ -49,23 +26,28 @@ async function run(): Promise<void> {
       }
     });
   } catch (error) {
-    core.setFailed("Error creating ovtokit:\n" + error.message);
-  }
-  if (octokit == null) {
+    core.setFailed("Error creating octokit:\n" + error.message);
     return;
   }
+
+  if (octokit == null) {
+    core.setFailed("Error creating octokit:\noctokit was null");
+    return;
+  }
+
+  let statusRequest: StatusRequest
   try {
-    console.log(repository);
-    await octokit.repos.createStatus({
-      owner: owner,
-      repo: repository,
-      context: context,
-      sha: sha,
-      state: state,
-      description: description
-    });
+    statusRequest = makeStatusRequest();
+  }
+  catch (error) {
+    core.setFailed(`Error creating status request object: ${error.message}`);
+    return;
+  }
+
+  try {   
+    await octokit.repos.createStatus(statusRequest);
   } catch (error) {
-    core.setFailed(`Error setting status:\n${error.message}\nDetails:\nowner:${owner}\nrepo:${repository}\nsha:${sha}`);
+    core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
   }
 }
 
