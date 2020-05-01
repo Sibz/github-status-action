@@ -653,7 +653,7 @@ function run() {
             yield octokit.repos.createStatus(statusRequest);
         }
         catch (error) {
-            core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${statusRequest}`);
+            core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
         }
     });
 }
