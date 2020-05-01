@@ -43,11 +43,11 @@ async function run(): Promise<void> {
     core.setFailed(`Error creating status request object: ${error.message}`);
     return;
   }
-  
+
   try {   
     await octokit.repos.createStatus(statusRequest);
   } catch (error) {
-    core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${statusRequest}`);
+    core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
   }
 }
 
