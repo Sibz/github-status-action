@@ -2,10 +2,11 @@ import * as actionsCore from '@actions/core'
 import inputNames from './inputNames';
 import { RequestParameters } from '@octokit/types';
 
+export type CommitState = "success" | "error" | "failure" | "pending";
 export type StatusRequest = RequestParameters & Pick<any, "owner" | "repo" | "state" | "sha" | "description" | "context" | "target_url">;
+export const ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
 
 const regExUsername = /^\w+-?\w+(?!-)$/;
-export const ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
 
 export default function makeStatusRequest(testCore: any | null = null): StatusRequest {
     let core: CoreActionsForTesting =
@@ -32,8 +33,6 @@ export default function makeStatusRequest(testCore: any | null = null): StatusRe
 
     return request;
 }
-
-export type CommitState = "success" | "error" | "failure" | "pending";
 
 export interface CoreActionsForTesting {
     getInput: (arg: string) => string
