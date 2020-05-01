@@ -19,7 +19,7 @@ export default function makeStatusRequest(testCore: any | null = null): StatusRe
     request.owner = core.getInput(inputNames.owner);
     request.repo = core.getInput(inputNames.repo);
     request.sha = core.getInput(inputNames.sha);
-    //request.target_url = core.getInput(inputNames.target_url);
+    request.target_url = core.getInput(inputNames.target_url);
 
     if (!regExUsername.test(request.owner))
     {

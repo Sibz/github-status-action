@@ -10,7 +10,7 @@ const INPUT_REPOSITORY_WITHOWNER = INPUT_OWNER + "/Test.Repository-1";
 const INPUT_STATE: CommitState = "success";
 const INPUT_DESC = "Test Description";
 const INPUT_SHA = "TestSHA";
-//const INPUT_TARGETURL = "test/uri";
+const INPUT_TARGETURL = "test/uri";
 
 const actionsCore: CoreActionsForTesting = {
     getInput: (arg:string) => {
@@ -27,8 +27,8 @@ const actionsCore: CoreActionsForTesting = {
                 return INPUT_DESC;
             case inputNames.sha:
                 return INPUT_SHA;
-            //case inputNames.target_url:
-              //  return INPUT_TARGETURL;
+            case inputNames.target_url:
+               return INPUT_TARGETURL;
             default:
                 return "input not in test mock";
         }
@@ -75,9 +75,9 @@ test("should getInput description", t=> {
 test("should getInput sha", t=> {
     t.is(makeStatusRequest(actionsCore).sha, INPUT_SHA);
 });
-// test("should getInput target_url", t=> {
-//    t.is(makeStatusRequest(actionsCore).target_url, INPUT_TARGETURL);
-// });
+test("should getInput target_url", t=> {
+   t.is(makeStatusRequest(actionsCore).target_url, INPUT_TARGETURL);
+});
 
 test("should getInput repo and remove leading owner name", t=> {
     t.is(makeStatusRequest(actionsCoreAlt1).repo, INPUT_REPOSITORY);

@@ -31,6 +31,9 @@ inputs:
     description: 'SHA of commit to update status on, defaults to context github.sha'
     default: ${{ github.sha }}
     required: false
+  target_url: 
+    description: 'URL/URI to use for further details.'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

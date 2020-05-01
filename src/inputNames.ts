@@ -7,7 +7,7 @@ export const INPUT_NAMES = {
     context: "context",
     sha: "sha",
     desc: "description",
-    //target_url: "target_url"    
+    target_url: "target_url"    
 }
 
 export default INPUT_NAMES;
