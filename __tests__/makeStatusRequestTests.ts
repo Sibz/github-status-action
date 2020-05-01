@@ -1,9 +1,10 @@
 import test from 'ava';
-import makeStatusRequest, { CoreActionsForTesting, CommitState} from '../src/makeStatusRequest'
+import makeStatusRequest, { CoreActionsForTesting, CommitState, ERR_INVALID_OWNER} from '../src/makeStatusRequest'
 import inputNames from '../src/inputNames'
 
 const INPUT_CONTEXT = "test context";
 const INPUT_OWNER = "TestOwner";
+const INPUT_OWNER_INVALID = "-TestOwner";
 const INPUT_REPOSITORY = "Test.Repository-1";
 const INPUT_REPOSITORY_WITHOWNER = INPUT_OWNER + "/Test.Repository-1";
 const INPUT_STATE: CommitState = "success";
@@ -44,6 +45,18 @@ const actionsCoreAlt1: CoreActionsForTesting = {
     }
 }
 
+const actionsCoreAlt2: CoreActionsForTesting = {
+    getInput: (arg:string) => {
+        switch(arg) {
+            case inputNames.owner:
+                return INPUT_OWNER_INVALID;
+            default:
+                return actionsCore.getInput(arg);
+        }
+    }
+}
+
+
 test("should getInput context", t=> {
     t.is(makeStatusRequest(actionsCore).context, INPUT_CONTEXT);
 });
@@ -69,3 +82,8 @@ test("should getInput sha", t=> {
 test("should getInput repo and remove leading owner name", t=> {
     t.is(makeStatusRequest(actionsCoreAlt1).repo, INPUT_REPOSITORY);
 });
+
+test("when owner is not a valid GitHub username, should throw", t=> {
+    let err = t.throws(()=> makeStatusRequest(actionsCoreAlt2));
+    t.is(err.message, ERR_INVALID_OWNER)
+})
