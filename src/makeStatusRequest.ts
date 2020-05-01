@@ -5,6 +5,7 @@ import { RequestParameters } from '@octokit/types';
 export type CommitState = "success" | "error" | "failure" | "pending";
 export type StatusRequest = RequestParameters & Pick<any, "owner" | "repo" | "state" | "sha" | "description" | "context" | "target_url">;
 export const ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
+export const ERR_INVALID_STATE = "Input 'state' must be one of success | error | failure | pending";
 
 const regExUsername = /^\w+-?\w+(?!-)$/;
 
@@ -22,9 +23,12 @@ export default function makeStatusRequest(testCore: any | null = null): StatusRe
     request.sha = core.getInput(inputNames.sha);
     request.target_url = core.getInput(inputNames.target_url);
 
-    if (!regExUsername.test(request.owner))
-    {
+    if (!regExUsername.test(request.owner)) {
         throw new Error(ERR_INVALID_OWNER);
+    }
+
+    if (!validateState(request.state)) {
+        throw new Error(ERR_INVALID_STATE);
     }
 
     if (request.repo.startsWith(`${request.owner}/`)) {
@@ -34,6 +38,12 @@ export default function makeStatusRequest(testCore: any | null = null): StatusRe
     return request;
 }
 
+function validateState(state: any): boolean {
+    return (state == "success"
+        || state == "error"
+        || state == "failure"
+        || state == "pending");
+}
 export interface CoreActionsForTesting {
     getInput: (arg: string) => string
 }

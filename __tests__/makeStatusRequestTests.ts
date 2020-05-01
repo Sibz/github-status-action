@@ -1,5 +1,5 @@
 import test from 'ava';
-import makeStatusRequest, { CoreActionsForTesting, CommitState, ERR_INVALID_OWNER} from '../src/makeStatusRequest'
+import makeStatusRequest, { CoreActionsForTesting, CommitState, ERR_INVALID_OWNER, ERR_INVALID_STATE} from '../src/makeStatusRequest'
 import inputNames from '../src/inputNames'
 
 const INPUT_CONTEXT = "test context";
@@ -8,6 +8,7 @@ const INPUT_OWNER_INVALID = "-TestOwner";
 const INPUT_REPOSITORY = "Test.Repository-1";
 const INPUT_REPOSITORY_WITHOWNER = INPUT_OWNER + "/Test.Repository-1";
 const INPUT_STATE: CommitState = "success";
+const INPUT_STATE_INVALID: CommitState = "failed" as CommitState;
 const INPUT_DESC = "Test Description";
 const INPUT_SHA = "TestSHA";
 const INPUT_TARGETURL = "test/uri";
@@ -56,6 +57,17 @@ const actionsCoreAlt2: CoreActionsForTesting = {
     }
 }
 
+const actionsCoreAlt3: CoreActionsForTesting = {
+    getInput: (arg:string) => {
+        switch(arg) {
+            case inputNames.state:
+                return INPUT_STATE_INVALID;
+            default:
+                return actionsCore.getInput(arg);
+        }
+    }
+}
+
 
 test("should getInput context", t=> {
     t.is(makeStatusRequest(actionsCore).context, INPUT_CONTEXT);
@@ -86,4 +98,9 @@ test("should getInput repo and remove leading owner name", t=> {
 test("when owner is not a valid GitHub username, should throw", t=> {
     let err = t.throws(()=> makeStatusRequest(actionsCoreAlt2));
     t.is(err.message, ERR_INVALID_OWNER)
-})
+});
+
+test("should validate state", t=> {
+    let err = t.throws(()=> makeStatusRequest(actionsCoreAlt3));
+    t.is(err.message, ERR_INVALID_STATE)
+});
