@@ -4,6 +4,9 @@ import { RequestParameters } from '@octokit/types';
 
 export type StatusRequest = RequestParameters & Pick<any, "owner" | "repo" | "state" | "sha" | "description" | "context" | "target_url">;
 
+const regExUsername = /^\w+-?\w+(?!-)$/;
+export const ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
+
 export default function makeStatusRequest(testCore: any | null = null): StatusRequest {
     let core: CoreActionsForTesting =
         testCore as CoreActionsForTesting ?? actionsCore as CoreActionsForTesting;
@@ -17,6 +20,11 @@ export default function makeStatusRequest(testCore: any | null = null): StatusRe
     request.repo = core.getInput(inputNames.repo);
     request.sha = core.getInput(inputNames.sha);
     //request.target_url = core.getInput(inputNames.target_url);
+
+    if (!regExUsername.test(request.owner))
+    {
+        throw new Error(ERR_INVALID_OWNER);
+    }
 
     if (request.repo.startsWith(`${request.owner}/`)) {
         request.repo = request.repo.replace(`${request.owner}/`, '');
