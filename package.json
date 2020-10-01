@@ -23,7 +23,7 @@
   "author": "Sibz@EntityZero",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0",
+    "@actions/core": "^1.2.6",
     "@octokit/rest": "^17.6.0"
   },
   "devDependencies": {
