@@ -7,7 +7,7 @@ export type StatusRequest = RequestParameters & Pick<any, "owner" | "repo" | "st
 export const ERR_INVALID_OWNER = "Input 'owner' must be a valid GitHub username";
 export const ERR_INVALID_STATE = "Input 'state' must be one of success | error | failure | pending";
 
-const regExUsername = /^\w+-?\w+(?!-)$/;
+const regExUsername = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/;
 
 export default function makeStatusRequest(testCore: any | null = null): StatusRequest {
     let core: CoreActionsForTesting =
