@@ -2,12 +2,12 @@ name: 'github-status-action'
 description: 'Adds a check status on a commit, GitHub reports the last status added for a particular context.'
 author: 'Sibz@EntityZero'
 branding:
-  icon: 'check'  
+  icon: 'check'
   color: 'green'
 inputs:
   authToken:
     description: 'Use secrets.GITHUB_TOKEN or your own token if you need to trigger other workflows the use "on: status"'
-    required: true  
+    required: true
   state:
     description: 'The status of the check: success, error, failure or pending'
     required: true
@@ -31,9 +31,9 @@ inputs:
     description: 'SHA of commit to update status on, defaults to context github.sha'
     default: ${{ github.sha }}
     required: false
-  target_url: 
+  target_url:
     description: 'URL/URI to use for further details.'
     required: false
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
