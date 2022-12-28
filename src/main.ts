@@ -1,31 +1,16 @@
 import * as core from '@actions/core'
-import { Octokit } from '@octokit/rest'
+import * as github from '@actions/github'
 import makeStatus, { StatusRequest } from './makeStatusRequest'
 import makeStatusRequest from './makeStatusRequest';
 import { RequestParameters } from '@octokit/types';
 
 async function run(): Promise<void> {
   const authToken: string = core.getInput('authToken');
-  let octokit: Octokit | null = null;
+  let octokit: any | null = null;
 
   try {
-    octokit = new Octokit({
-      auth: authToken,
-      userAgent: "github-status-action",
-      baseUrl: 'https://api.github.com',
-      log: {
-        debug: () => { },
-        info: () => { },
-        warn: console.warn,
-        error: console.error
-      },
-      request: {
-        agent: undefined,
-        fetch: undefined,
-        timeout: 0
-      }
-    });
-  } catch (error) {
+    octokit = github.getOctokit(authToken);
+  } catch (error: any) {
     core.setFailed("Error creating octokit:\n" + error.message);
     return;
   }
@@ -39,14 +24,14 @@ async function run(): Promise<void> {
   try {
     statusRequest = makeStatusRequest();
   }
-  catch (error) {
+  catch (error: any) {
     core.setFailed(`Error creating status request object: ${error.message}`);
     return;
   }
 
   try {   
     await octokit.repos.createStatus(statusRequest);
-  } catch (error) {
+  } catch (error: any) {
     core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
   }
 }
