@@ -35,5 +35,5 @@ inputs:
     description: 'URL/URI to use for further details.'
     required: false
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'dist/index.js'
