@@ -46,7 +46,7 @@ on: # run on any PRs and main branch changes
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Run the action # You would run your tests before this using the output to set state/desc
       uses: Sibz/github-status-action@v1
       with: 
