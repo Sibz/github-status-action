@@ -26,7 +26,9 @@ async function run(): Promise<void> {
       }
     });
   } catch (error) {
-    core.setFailed("Error creating octokit:\n" + error.message);
+    if (error instanceof Error) {
+      core.setFailed("Error creating octokit:\n" + error.message);
+    }
     return;
   }
 
@@ -40,14 +42,18 @@ async function run(): Promise<void> {
     statusRequest = makeStatusRequest();
   }
   catch (error) {
-    core.setFailed(`Error creating status request object: ${error.message}`);
+    if (error instanceof Error) {
+      core.setFailed(`Error creating status request object: ${error.message}`);
+    }
     return;
   }
 
   try {   
     await octokit.repos.createCommitStatus(statusRequest);
   } catch (error) {
-    core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
+    if (error instanceof Error) {
+      core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
+    }
   }
 }
 
