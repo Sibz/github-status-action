@@ -20,11 +20,11 @@ inputs:
     default: ''
     required: false
   owner:
-    description: 'Repostory owner, defaults to context github.repository_owner if omited'
+    description: 'Repository owner, defaults to context github.repository_owner if omitted'
     default: ${{ github.repository_owner }}
     required: false
   repository:
-    description: 'Repository, default to context github.repository if omited'
+    description: 'Repository, default to context github.repository if omitted'
     default: ${{ github.repository }}
     required: false
   sha:
