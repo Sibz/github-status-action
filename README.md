@@ -7,7 +7,8 @@
 # GitHub Status Action V2
 
 Adds a status update to a commit. GitHub will always show the latest state of a context.
-
+**Disclaimer** This version was created because the [original (V1)](https://github.com/Sibz/github-status-action) is not being updated by the creator since a while.
+ 
 ## Usage
 
 ### Inputs
