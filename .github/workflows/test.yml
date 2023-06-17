@@ -1,43 +1,49 @@
 name: "test"
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  test: # make sure the action works on a clean machine without building
+  test:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
-    - uses: actions/checkout@v2
+    
+    - uses: actions/checkout@v3
+    
     - name: Test min args
       uses: ./
       with: 
-        authToken: ${{secrets.GITHUB_TOKEN}}
+        authToken: ${{ secrets.GITHUB_TOKEN }}
         state: 'success'
+
     - name: Test with all args except owner/repo (success)
       uses: ./
       with: 
         authToken: ${{secrets.GITHUB_TOKEN}}
         context: "Test run"
         description: "Test with all args"
-        target_url: "https://github.com/Sibz/github-status-action"
-        sha: ${{github.event.pull_request.head.sha || github.sha}}
+        target_url: "https://github.com/GuiBranco/github-status-action-v2"
+        sha: ${{ github.event.pull_request.head.sha || github.sha }}
         state: 'success'
+
     - name: Test failing action
       uses: ./
       with: 
         authToken: ${{secrets.GITHUB_TOKEN}}
         context: "Test run failed"
         description: "Failed test"
-        sha: ${{github.event.pull_request.head.sha || github.sha}}
+        sha: ${{ github.event.pull_request.head.sha || github.sha }}
         state: 'failure'
+ 
     - name: Test failing action now succeeded
       uses: ./
       with: 
         authToken: ${{secrets.GITHUB_TOKEN}}
         context: "Test run failed"
         description: "Failed test now succeeded"
-        sha: ${{github.event.pull_request.head.sha || github.sha}}
+        sha: ${{ github.event.pull_request.head.sha || github.sha }}
         state: 'success'
         

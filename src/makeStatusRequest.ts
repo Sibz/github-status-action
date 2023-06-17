@@ -44,6 +44,7 @@ function validateState(state: any): boolean {
         || state == "failure"
         || state == "pending");
 }
+
 export interface CoreActionsForTesting {
     getInput: (arg: string) => string
 }
