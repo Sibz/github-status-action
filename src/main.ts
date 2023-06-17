@@ -1,8 +1,6 @@
 import * as core from '@actions/core'
 import { Octokit } from '@octokit/rest'
-import makeStatus, { StatusRequest } from './makeStatusRequest'
-import makeStatusRequest from './makeStatusRequest';
-import { RequestParameters } from '@octokit/types';
+import makeStatusRequest, { StatusRequest } from './makeStatusRequest'
 
 async function run(): Promise<void> {
   const authToken: string = core.getInput('authToken');
