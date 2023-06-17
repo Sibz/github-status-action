@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" 
-  src="https://github.com/Sibz/github-status-action/workflows/test/badge.svg"></a>
-  <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" src="https://github.com/Sibz/github-status-action/workflows/build/badge.svg"></a>
+  <a href="https://github.com/GuiBranco/github-status-action-v2"><img alt="github-status-action-v2 status" 
+  src="https://github.com/GuiBranco/github-status-action-v2/workflows/test/badge.svg"></a>
+  <a href="https://github.com/GuiBranco/github-status-action-v2"><img alt="github-status-action-v2 status" src="https://github.com/GuiBranco/github-status-action-v2/workflows/build/badge.svg"></a>
 </p>
 
-# GitHub Status Action
+# GitHub Status Action V2
 
 Adds a status update to a commit. GitHub will always show the latest state of a context.
 

@@ -1,8 +1,8 @@
 {
-  "name": "github-status-action",
-  "version": "1.1.0",
+  "name": "github-status-action-v2",
+  "version": "2.0.0",
   "private": true,
-  "description": "Github status action",
+  "description": "Github status action V2",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sibz/github-status-action.git"
+    "url": "git+https://github.com/GuiBranco/github-status-action-v2.git"
   },
   "keywords": [
     "actions",
     "node",
     "setup"
   ],
-  "author": "Sibz@EntityZero",
+  "author": "GuiBranco",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.6",
