@@ -11,7 +11,7 @@ async function run(): Promise<void> {
   try {
     octokit = new Octokit({
       auth: authToken,
-      userAgent: "github-status-action",
+      userAgent: "github-status-action-v2",
       baseUrl: 'https://api.github.com',
       log: {
         debug: () => { },
