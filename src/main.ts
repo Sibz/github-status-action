@@ -50,7 +50,12 @@ async function run(): Promise<void> {
     await octokit.repos.createCommitStatus(statusRequest);
   } catch (error) {
     if (error instanceof Error) {
-      core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
+      core.setFailed(
+        `Github returned error \"${error.message}\" when setting status on commit: ${statusRequest.sha}\n` +
+          ` Request object:\n` +
+          ` ${JSON.stringify(statusRequest, null, 2)}` +
+          ` Possible issues could be that the token used does not have access to the repository containing the commit or the commit/repository does not exist.`
+      );
     }
   }
 }
