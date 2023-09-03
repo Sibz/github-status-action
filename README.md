@@ -1,6 +1,7 @@
 <p align="center">
   <a href="https://github.com/GuiBranco/github-status-action-v2"><img alt="github-status-action-v2 status" src="https://github.com/GuiBranco/github-status-action-v2/workflows/test/badge.svg"></a>
   <a href="https://github.com/GuiBranco/github-status-action-v2"><img alt="github-status-action-v2 status" src="https://github.com/GuiBranco/github-status-action-v2/workflows/build/badge.svg"></a>
+  <a href="https://wakatime.com/badge/github/guibranco/github-status-action-v2"><img src="https://wakatime.com/badge/github/guibranco/github-status-action-v2.svg" alt="wakatime"></a>
 </p>
 
 # GitHub Status Action V2
