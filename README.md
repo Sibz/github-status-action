@@ -7,7 +7,10 @@
 # GitHub Status Action V2
 
 Adds a status update to a commit. GitHub will always show the latest state of a context.
-**Disclaimer** This version was created because the [original (V1)](https://github.com/Sibz/github-status-action) is not being updated by the creator since a while.
+
+> **Warning**
+>
+>**Disclaimer** This version was created because the [original (V1)](https://github.com/Sibz/github-status-action) has not been updated by the creator for a while.
  
 ## Usage
 
@@ -18,11 +21,11 @@ Adds a status update to a commit. GitHub will always show the latest state of a 
  * `state` (required)  
  The status of the check should only be `success`, `error`, `failure` or `pending`
  * `context`  
- The context, this is displayed as the name of the check
+ The context, is displayed as the name of the check
  * `description`  
  Short text explaining the status of the check
  * `owner`  
- Repository owner, defaults to context github.repository_owner if omitted
+ The repository owner defaults to context github.repository_owner if omitted
  * `repository`  
  Repository, default to context github.repository if omitted
  * `sha`  
