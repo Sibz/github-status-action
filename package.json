@@ -29,7 +29,7 @@
   "devDependencies": {
     "@octokit/types": "^9.2.1",
     "@types/node": "20.1.2",
-    "@vercel/ncc": "^0.36.1",
+    "@vercel/ncc": "^0.38.0",
     "ava": "^3.8.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
