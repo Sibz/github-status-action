@@ -1,12 +1,29 @@
 version: 2
 
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
+- package-ecosystem: "npm"
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 50
+  assignees: 
+    - "guibranco"
+  reviewers: 
+    - "guibranco"
+  labels:
+    - "nuget"
+    - ".NET"
+    - "dependencies"
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 50
+  assignees: 
+    - "guibranco"
+  reviewers: 
+    - "guibranco"
+  labels:
+    - "github-actions"
+    - "dependencies"
