@@ -52,7 +52,7 @@ on: # run on any PRs and main branch changes
     steps:
     - uses: actions/checkout@v3
     - name: Run the action # You would run your tests before this using the output to set state/desc
-      uses: GuiBranco/github-status-action-v2@v1.1.7
+      uses: guibranco/github-status-action-v2@v1.1.7
       with: 
         authToken: ${{secrets.GITHUB_TOKEN}}
         context: 'Test run'
