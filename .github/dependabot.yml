@@ -11,8 +11,8 @@ updates:
   reviewers: 
     - "guibranco"
   labels:
-    - "nuget"
-    - ".NET"
+    - "npm"
+    - "javascript"
     - "dependencies"
 
 - package-ecosystem: "github-actions"
