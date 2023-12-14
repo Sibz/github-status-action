@@ -1,7 +1,7 @@
 repo_name: guibranco/github-status-action-v2
-report_id: 7fc1bd10e057ae963d8cae699395b33e
+report_id: a366869a449f20969402581e9c9c5a92
 repo_type: Public
-timestamp: '2023-11-09T16:53:27+00:00'
+timestamp: '2023-12-14T09:38:06+00:00'
 requested_by: dependabot[bot]
 provider: github
 branch: main
@@ -18,7 +18,7 @@ tools:
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
   detection_source: package.json
   last_updated_by: dependabot[bot]
-  last_updated_on: 2023-09-17 03:31:26.000000000 Z
+  last_updated_on: 2023-12-11 06:00:09.000000000 Z
 - name: TypeScript
   description: A superset of JavaScript that compiles to clean JavaScript output
   website_url: http://www.typescriptlang.org
@@ -58,7 +58,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
-  detection_source: ".github/workflows/test.yml"
+  detection_source: ".github/workflows/build.yml"
   last_updated_by: dependabot[bot]
   last_updated_on: 2023-09-17 03:34:30.000000000 Z
 - name: Octokit
@@ -71,7 +71,7 @@ tools:
   image_url: https://img.stackshare.io/service/9827/octokit-dotnet_2.png
   detection_source: package.json
   last_updated_by: dependabot[bot]
-  last_updated_on: 2023-10-30 18:34:17.000000000 Z
+  last_updated_on: 2023-12-11 05:58:23.000000000 Z
 - name: npm
   description: The package manager for JavaScript.
   website_url: https://www.npmjs.com/
@@ -98,42 +98,42 @@ tools:
 - name: "@types/node"
   description: TypeScript definitions for Node.js
   package_url: https://www.npmjs.com/@types/node
-  version: 20.8.10
+  version: 20.10.4
   license: MIT
   open_source: true
   hosted_saas: false
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15809/default_5e5e8ac63beda29f31f1844df64d4b8247570a66.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/guibranco/github-status-action-v2/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: dependabot[bot]
-  last_updated_on: 2023-11-06 11:17:33.000000000 Z
+  last_updated_on: 2023-12-11 06:02:03.000000000 Z
 - name: ava
   description: Testing can be a drag. AVA helps you get it done
   package_url: https://www.npmjs.com/ava
-  version: 3.15.0
+  version: 6.0.1
   license: MIT
   open_source: true
   hosted_saas: false
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15883/default_0b10af8ca19c215f781dc07442e75bdc831089d0.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/guibranco/github-status-action-v2/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: Sibz
   last_updated_on: 2020-04-30 16:15:29.000000000 Z
 - name: ts-node
   description: TypeScript execution environment and REPL for node.js
   package_url: https://www.npmjs.com/ts-node
-  version: 10.9.1
+  version: 10.9.2
   license: MIT
   open_source: true
   hosted_saas: false
   category: Libraries
   sub_category: npm Packages
   image_url: https://img.stackshare.io/package/15830/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
-  detection_source_url: package-lock.json
+  detection_source_url: https://github.com/guibranco/github-status-action-v2/blob/main/package-lock.json
   detection_source: package.json
   last_updated_by: dependabot[bot]
-  last_updated_on: 2023-11-06 11:17:33.000000000 Z
+  last_updated_on: 2023-12-11 06:02:03.000000000 Z
