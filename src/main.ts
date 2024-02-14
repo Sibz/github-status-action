@@ -31,7 +31,7 @@ async function run(): Promise<void> {
   }
 
   try {
-    await octokit.repos.createCommitStatus(statusRequest);
+    await octokit.rest.repos.createCommitStatus(statusRequest);
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(
