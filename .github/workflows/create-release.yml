@@ -1,0 +1,51 @@
+name: Create release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            dist:
+              - "dist/**"
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0
+        with:
+          versionSpec: "5.x"
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
+    
+      - name: Create Release
+        if: ${{ steps.changes.outputs.dist == 'true' }}
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          allowUpdates: false
+          skipIfReleaseExists: true
+          draft: false
+          makeLatest: true
+          tag: v${{ steps.gitversion.outputs.semVer }}
+          name: Release v${{ steps.gitversion.outputs.semVer }}
+          generateReleaseNotes: true
+          body: Release ${{ steps.gitversion.outputs.semVer }} of ${{ github.event.repository.name }}
