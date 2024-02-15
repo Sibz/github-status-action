@@ -12,6 +12,7 @@ concurrency:
 jobs:
   create_release:
     name: Create release
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
