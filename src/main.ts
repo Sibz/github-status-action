@@ -1,32 +1,17 @@
-import * as core from '@actions/core'
-import { Octokit } from '@octokit/rest'
-import makeStatus, { StatusRequest } from './makeStatusRequest'
-import makeStatusRequest from './makeStatusRequest';
-import { RequestParameters } from '@octokit/types';
+import * as core from "@actions/core";
+import * as github from '@actions/github';
+import makeStatusRequest, { StatusRequest } from "./makeStatusRequest";
 
 async function run(): Promise<void> {
-  const authToken: string = core.getInput('authToken');
-  let octokit: Octokit | null = null;
+  const authToken: string = core.getInput("authToken");
+  let octokit: any | null = null;
 
   try {
-    octokit = new Octokit({
-      auth: authToken,
-      userAgent: "github-status-action",
-      baseUrl: 'https://api.github.com',
-      log: {
-        debug: () => { },
-        info: () => { },
-        warn: console.warn,
-        error: console.error
-      },
-      request: {
-        agent: undefined,
-        fetch: undefined,
-        timeout: 0
-      }
-    });
+    octokit = github.getOctokit(authToken);
   } catch (error) {
-    core.setFailed("Error creating octokit:\n" + error.message);
+    if (error instanceof Error) {
+      core.setFailed("Error creating octokit:\n" + error.message);
+    }
     return;
   }
 
@@ -35,19 +20,27 @@ async function run(): Promise<void> {
     return;
   }
 
-  let statusRequest: StatusRequest
+  let statusRequest: StatusRequest;
   try {
     statusRequest = makeStatusRequest();
-  }
-  catch (error) {
-    core.setFailed(`Error creating status request object: ${error.message}`);
+  } catch (error) {
+    if (error instanceof Error) {
+      core.setFailed(`Error creating status request object: ${error.message}`);
+    }
     return;
   }
 
-  try {   
-    await octokit.repos.createStatus(statusRequest);
+  try {
+    await octokit.rest.repos.createCommitStatus(statusRequest);
   } catch (error) {
-    core.setFailed(`Error setting status:\n${error.message}\nRequest object:\n${JSON.stringify(statusRequest, null, 2)}`);
+    if (error instanceof Error) {
+      core.setFailed(
+        `Github returned error "${error.message}" when setting status on commit: ${statusRequest.sha}\n` +
+          ` Request object:\n` +
+          ` ${JSON.stringify(statusRequest, null, 2)}` +
+          ` Possible issues could be that the token used does not have access to the repository containing the commit or the commit/repository does not exist.`
+      );
+    }
   }
 }
 

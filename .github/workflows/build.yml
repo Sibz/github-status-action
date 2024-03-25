@@ -1,15 +1,18 @@
-name: "build"
-on: # rebuild any PRs and main branch changes
+name: Build
+
+on:
   pull_request:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  build: # make sure build/ci work properly
+  build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+
+    - uses: actions/checkout@v4
+    
     - run: |
         npm install
         npm run all 
