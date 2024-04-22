@@ -28,7 +28,7 @@
     "node": "^21.7.3"
   },
   "devDependencies": {
-    "@octokit/types": "^13.4.0",
+    "@octokit/types": "^13.4.1",
     "@types/node": "20.12.2",
     "@vercel/ncc": "^0.38.1",
     "ava": "^6.1.2",
