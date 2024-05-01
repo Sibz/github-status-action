@@ -1,3 +1,15 @@
+
+
+## This is no longer being maintained, a working fork is available here: 
+
+https://github.com/guibranco/github-status-action-v2
+
+## Marketplace:
+
+https://github.com/marketplace/actions/github-status-action-v2
+
+----
+
 <p align="center">
   <a href="https://github.com/Sibz/github-status-action"><img alt="github-status-action status" 
   src="https://github.com/Sibz/github-status-action/workflows/test/badge.svg"></a>
